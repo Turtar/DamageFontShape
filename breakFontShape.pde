@@ -10,11 +10,11 @@ void setup() {
 
   String fontName = "HiraginoSans-W6";
   int fontSize = 50;
-  damageFontShape = new DamageFontShape(fontName, fontSize, "あ");
+  damageFontShape = new DamageFontShape(fontName, fontSize, "%あいうえおaiueo");
 }
 
 void draw() {
-  background(0);
+  background(100);
   ellipse(mouseX, mouseY, 100, 100);
   damageFontShape.displayShape();
 }
