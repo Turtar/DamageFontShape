@@ -5,15 +5,6 @@ public class DamageFontShape {
   public DamageFontShape(String _fontName, int _fontSize, String _drawText) {
     pathInfoList = new ArrayList<ArrayList<PathInfo>>();
     makePathInfoList(_fontName, _fontSize, _drawText);
-    //println(pathInfoList.size());
-    //println(pathInfoList.get(0).size());
-    //println(pathInfoList.get(0).get(0).pathList.size());
-
-    //for (int i=0; i<pathInfoList.size(); i++) {
-    //  for (int j=0; j<pathInfoList.get(i).size(); j++) {
-    //    println(pathInfoList.get(i).get(j).isContour);
-    //  }
-    //}
   }
 
 
@@ -43,7 +34,6 @@ public class DamageFontShape {
 
       while (!iterator.isDone()) {
         int type = iterator.currentSegment(coords);
-
         if (type == PathIterator.SEG_CLOSE) {
           pathInfoList.get(i).add(pathInfo);
           iterator.next();
@@ -51,10 +41,9 @@ public class DamageFontShape {
         }
 
         if (type == PathIterator.SEG_MOVETO) {
-          pathInfo = new PathInfo(contours>0);
+          pathInfo = new PathInfo(contours > 0);
           contours++;
         }
-
         pathInfo.addPath(new Path(type, coords));
         iterator.next();
       }
@@ -63,11 +52,9 @@ public class DamageFontShape {
 
 
   public void displayShape() {
-    for (int i=0; i<pathInfoList.size(); i++) {
+    for (ArrayList<PathInfo> pathInfoArray : pathInfoList) {
       beginShape();
-      for (int j=0; j<pathInfoList.get(i).size(); j++) {
-        PathInfo pathInfo = pathInfoList.get(i).get(j);
-
+      for (PathInfo pathInfo : pathInfoArray) {
         if (pathInfo.isContour) {
           beginContour();
         }
