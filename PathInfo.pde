@@ -6,26 +6,34 @@
 
 
 public class Path {
-  int pathMode;
-  float[] coords;
+  public int pathMode;
+  private float[] coords;
   
   public Path(int _pathMode, float[] _coords) {
     pathMode = _pathMode;
     coords = _coords.clone();
   }
+  
+  public float[] getCoords() {
+    return coords;
+  }
 }
 
 
 public class PathInfo {
-  ArrayList<Path> paths;
-  boolean isContour;
+  private ArrayList<Path> pathList;
+  public boolean isContour;
   
   public PathInfo(boolean _isContour) {
-    paths = new ArrayList<Path>();
+    pathList = new ArrayList<Path>();
     isContour = _isContour;
   }
   
-  public void addInfo(Path _path) {
-    paths.add(_path);
+  public void addPath(Path _path) {
+    pathList.add(_path);
+  }
+  
+  public ArrayList<Path> getPathList() {
+    return pathList;
   }
 }
