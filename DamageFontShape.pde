@@ -1,9 +1,8 @@
 public class DamageFontShape {
-  //private ArrayList<PathInfo> pathInfoList;
-  private ArrayList<ArrayList<PathInfo>> pathInfoList;
+  private ArrayList<ArrayList<PathInfo>> stringsPathInfoList;
 
   public DamageFontShape(String _fontName, int _fontSize, String _drawText) {
-    pathInfoList = new ArrayList<ArrayList<PathInfo>>();
+    stringsPathInfoList = new ArrayList<ArrayList<PathInfo>>();
     makePathInfoList(_fontName, _fontSize, _drawText);
   }
 
@@ -29,13 +28,13 @@ public class DamageFontShape {
       int contours = 0;
       float[] coords = new float[6];
 
-      pathInfoList.add(new ArrayList<PathInfo>());
+      stringsPathInfoList.add(new ArrayList<PathInfo>());
       PathInfo pathInfo = new PathInfo(false);
 
       while (!iterator.isDone()) {
         int type = iterator.currentSegment(coords);
         if (type == PathIterator.SEG_CLOSE) {
-          pathInfoList.get(i).add(pathInfo);
+          stringsPathInfoList.get(i).add(pathInfo);
           iterator.next();
           continue;
         }
@@ -52,7 +51,7 @@ public class DamageFontShape {
 
 
   public void displayShape() {
-    for (ArrayList<PathInfo> pathInfoArray : pathInfoList) {
+    for (ArrayList<PathInfo> pathInfoArray : stringsPathInfoList) {
       beginShape();
       for (PathInfo pathInfo : pathInfoArray) {
         if (pathInfo.isContour) {
@@ -60,7 +59,20 @@ public class DamageFontShape {
         }
         for (int k=0; k<pathInfo.getPathList().size(); k++) {
           float[] coords = pathInfo.getPathList().get(k).getCoords();
-          vertex(coords[0], coords[1]);
+          switch(pathInfo.getPathList().get(k).pathMode) {
+          case PathIterator.SEG_MOVETO:
+            vertex(coords[0], coords[1]);
+            break;
+          case PathIterator.SEG_LINETO:
+            vertex(coords[0], coords[1]);
+            break;
+          case PathIterator.SEG_QUADTO:
+            quadraticVertex(coords[0], coords[1], coords[2], coords[3]);
+            break;
+          case PathIterator.SEG_CUBICTO:
+            bezierVertex(coords[0], coords[1], coords[2], coords[3], coords[4], coords[5]);
+            break;
+          }
         }
         if (pathInfo.isContour) {
           endContour();

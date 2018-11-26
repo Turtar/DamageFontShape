@@ -7,6 +7,7 @@ DamageFontShape damageFontShape;
 
 void setup() {
   size(600, 400);
+  print(PathIterator.SEG_CLOSE, PathIterator.SEG_MOVETO, PathIterator.SEG_LINETO, PathIterator.SEG_QUADTO, PathIterator.SEG_CUBICTO);
 
   String fontName = "HiraginoSans-W6";
   int fontSize = 50;
