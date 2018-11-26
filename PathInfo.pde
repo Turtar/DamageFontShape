@@ -1,10 +1,3 @@
-// PathInfo
-//   ArrayList<Path>
-//     pathMode: int (ex PathIterator.SEG_MOVETO)
-//     coords: float[6]
-//   isContour: boolean
-
-
 public class Path {
   public int pathMode;
   private float[] coords;

@@ -1,5 +1,7 @@
+import java.awt.Shape;
 public class DamageFontShape {
   private ArrayList<ArrayList<PathInfo>> stringsPathInfoList;
+  private int textSumWidth = 0;
 
   public DamageFontShape(String _fontName, int _fontSize, String _drawText) {
     stringsPathInfoList = new ArrayList<ArrayList<PathInfo>>();
@@ -11,12 +13,14 @@ public class DamageFontShape {
     FontRenderContext frc = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB)
       .createGraphics()
       .getFontRenderContext();
-
-    PathIterator iter = new Font(_fontName, Font.PLAIN, _fontSize)
+  
+    Shape stringShape = new Font(_fontName, Font.PLAIN, _fontSize)
       .createGlyphVector(frc, _drawString)
-      .getOutline(50*_index, _fontSize)
-      .getPathIterator(null);
-
+      .getOutline(textSumWidth, _fontSize);
+      
+    int margin = 5;
+    textSumWidth += stringShape.getBounds().width + margin;
+    PathIterator iter = stringShape.getPathIterator(null);
     return iter;
   }
 
@@ -61,16 +65,34 @@ public class DamageFontShape {
           float[] coords = pathInfo.getPathList().get(k).getCoords();
           switch(pathInfo.getPathList().get(k).pathMode) {
           case PathIterator.SEG_MOVETO:
-            vertex(coords[0], coords[1]);
+            vertex(
+              coords[0]+2*sin(frameCount/10), 
+              coords[1]+2*sin(frameCount/10)
+              );
             break;
           case PathIterator.SEG_LINETO:
-            vertex(coords[0], coords[1]);
+            vertex(
+              coords[0]+2*sin(frameCount/10), 
+              coords[1]+2*sin(frameCount/10)
+              );
             break;
           case PathIterator.SEG_QUADTO:
-            quadraticVertex(coords[0], coords[1], coords[2], coords[3]);
+            quadraticVertex(
+              coords[0]+2*sin(frameCount/10), 
+              coords[1]+2*sin(frameCount/10), 
+              coords[2]+2*sin(frameCount/10), 
+              coords[3]+2*sin(frameCount/10)
+              );
             break;
           case PathIterator.SEG_CUBICTO:
-            bezierVertex(coords[0], coords[1], coords[2], coords[3], coords[4], coords[5]);
+            bezierVertex(
+              coords[0]+2*sin(frameCount/10), 
+              coords[1]+2*sin(frameCount/10), 
+              coords[2]+5*sin(frameCount/10), 
+              coords[3], 
+              coords[4]+2*sin(frameCount/10), 
+              coords[5]+5*sin(frameCount/10)
+              );
             break;
           }
         }
