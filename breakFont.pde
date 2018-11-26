@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.awt.geom.PathIterator;
 
 DamageFontShape damageFontShape;
+float r = 0;
 
 void setup() {
   size(600, 400);
@@ -18,4 +19,8 @@ void draw() {
   background(100);
   ellipse(mouseX, mouseY, 100, 100);
   damageFontShape.displayShape();
+}
+
+void mousePressed() {
+  r += random(10, -10);
 }

@@ -30,13 +30,13 @@ public class DamageFontShape {
     for (int i=0; i<drawStrings.length; i++) {
       PathIterator iterator = createOutline(_fontName, _fontSize, drawStrings[i], i);
       int contours = 0;
-      float[] coords = new float[6];
+      float[] vectorValues = new float[6];
 
       stringsPathInfoList.add(new ArrayList<PathInfo>());
       PathInfo pathInfo = new PathInfo(false);
 
       while (!iterator.isDone()) {
-        int type = iterator.currentSegment(coords);
+        int type = iterator.currentSegment(vectorValues);
         if (type == PathIterator.SEG_CLOSE) {
           stringsPathInfoList.get(i).add(pathInfo);
           iterator.next();
@@ -47,7 +47,7 @@ public class DamageFontShape {
           pathInfo = new PathInfo(contours > 0);
           contours++;
         }
-        pathInfo.addPath(new Path(type, coords));
+        pathInfo.addPath(new Path(type, vectorValues));
         iterator.next();
       }
     }
@@ -62,36 +62,36 @@ public class DamageFontShape {
           beginContour();
         }
         for (int k=0; k<pathInfo.getPathList().size(); k++) {
-          float[] coords = pathInfo.getPathList().get(k).getCoords();
+          float[] vectorValues = pathInfo.getPathList().get(k).getVectorValues();
           switch(pathInfo.getPathList().get(k).pathMode) {
           case PathIterator.SEG_MOVETO:
             vertex(
-              coords[0]+2*sin(frameCount/10), 
-              coords[1]+2*sin(frameCount/10)
+              vectorValues[0]+r*sin(frameCount/10), 
+              vectorValues[1]+r*sin(frameCount/10)
               );
             break;
           case PathIterator.SEG_LINETO:
             vertex(
-              coords[0]+2*sin(frameCount/10), 
-              coords[1]+2*sin(frameCount/10)
+              vectorValues[0]+r*sin(frameCount/10), 
+              vectorValues[1]+r*sin(frameCount/10)
               );
             break;
           case PathIterator.SEG_QUADTO:
             quadraticVertex(
-              coords[0]+2*sin(frameCount/10), 
-              coords[1]+2*sin(frameCount/10), 
-              coords[2]+2*sin(frameCount/10), 
-              coords[3]+2*sin(frameCount/10)
+              vectorValues[0]+r*sin(frameCount/10), 
+              vectorValues[1], 
+              vectorValues[2], 
+              vectorValues[3]
               );
             break;
           case PathIterator.SEG_CUBICTO:
             bezierVertex(
-              coords[0]+2*sin(frameCount/10), 
-              coords[1]+2*sin(frameCount/10), 
-              coords[2]+5*sin(frameCount/10), 
-              coords[3], 
-              coords[4]+2*sin(frameCount/10), 
-              coords[5]+5*sin(frameCount/10)
+              vectorValues[0]+r*sin(frameCount/10), 
+              vectorValues[1], 
+              vectorValues[2], 
+              vectorValues[3], 
+              vectorValues[4], 
+              vectorValues[5]
               );
             break;
           }

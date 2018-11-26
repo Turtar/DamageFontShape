@@ -1,14 +1,14 @@
 public class Path {
   public int pathMode;
-  private float[] coords;
+  private float[] vectorValues;
   
-  public Path(int _pathMode, float[] _coords) {
+  public Path(int _pathMode, float[] _vectorValues) {
     pathMode = _pathMode;
-    coords = _coords.clone();
+    vectorValues = _vectorValues.clone();
   }
   
-  public float[] getCoords() {
-    return coords;
+  public float[] getVectorValues() {
+    return vectorValues;
   }
 }
 
