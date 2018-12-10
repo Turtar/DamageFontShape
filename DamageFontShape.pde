@@ -67,13 +67,13 @@ public class DamageFontShape {
           case PathIterator.SEG_MOVETO:
             vertex(
               vectorValues[0]+rx, 
-              vectorValues[1]+random(-10, 10)
+              vectorValues[1]+random(-5, 5)
               );
             break;
           case PathIterator.SEG_LINETO:
             vertex(
               vectorValues[0]+rx, 
-              vectorValues[1]+random(-10, 10)
+              vectorValues[1]+random(-5, 5)
               );
             break;
           case PathIterator.SEG_QUADTO:
@@ -89,9 +89,9 @@ public class DamageFontShape {
               vectorValues[0]+rx, 
               vectorValues[1]+ry,
               vectorValues[2]+rx, 
-              vectorValues[3]+random(-10, 10),
-              vectorValues[4]+random(-10, 10), 
-              vectorValues[5]+random(-10, 10)
+              vectorValues[3]+random(-5, 5),
+              vectorValues[4]+random(-5, 5), 
+              vectorValues[5]+random(-5, 5)
               );
             break;
           }
