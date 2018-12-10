@@ -19,6 +19,7 @@ void setup() {
 void draw() {
   
   background(0);
+  noStroke();
   fill(255, 0, 0);
   rx = 10 * cos(frameCount/40.0) * sin(frameCount/4);
   ry = 30 * sin(frameCount/100.0);

@@ -74,22 +74,22 @@ public class DamageFontShape {
           case PathIterator.SEG_LINETO:
             bezierVertex(
               vectorValues[0], 
-              vectorValues[1]+frameCount/4.0, 
-              vectorValues[0], 
               vectorValues[1], 
+              vectorValues[0], 
+              vectorValues[1]+frameCount/4.0, 
               vectorValues[0], 
               vectorValues[1]
               );
 
             break;
-          //case PathIterator.SEG_QUADTO:
-          //  quadraticVertex(
-          //    vectorValues[0], 
-          //    vectorValues[1], 
-          //    vectorValues[2], 
-          //    vectorValues[3]
-          //    );
-          //  break;
+            //case PathIterator.SEG_QUADTO:
+            //  quadraticVertex(
+            //    vectorValues[0], 
+            //    vectorValues[1], 
+            //    vectorValues[2], 
+            //    vectorValues[3]
+            //    );
+            //  break;
           case PathIterator.SEG_CUBICTO:
             bezierVertex(
               vectorValues[0], 
