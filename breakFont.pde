@@ -4,23 +4,22 @@ import java.awt.image.BufferedImage;
 import java.awt.geom.PathIterator;
 
 DamageFontShape damageFontShape;
-float r = 0;
+float rx = 0;
+float ry = 0;
 
 void setup() {
-  size(600, 400);
-  print(PathIterator.SEG_CLOSE, PathIterator.SEG_MOVETO, PathIterator.SEG_LINETO, PathIterator.SEG_QUADTO, PathIterator.SEG_CUBICTO);
+  size(1200, 400);
 
   String fontName = "HiraginoSans-W6";
-  int fontSize = 50;
-  damageFontShape = new DamageFontShape(fontName, fontSize, "%あいうえおaiueo");
+  int fontSize = 200;
+  damageFontShape = new DamageFontShape(fontName, fontSize, "熱くなれよ！");
 }
 
 void draw() {
-  background(100);
-  ellipse(mouseX, mouseY, 100, 100);
+  background(0);
+  fill(255, 0, 0);
+  rx = 10 * cos(frameCount/40.0) * sin(frameCount/4);
+  ry = 30 * sin(frameCount/100.0);
+  translate(100, 100);
   damageFontShape.displayShape();
-}
-
-void mousePressed() {
-  r += random(10, -10);
 }

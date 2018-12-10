@@ -66,32 +66,32 @@ public class DamageFontShape {
           switch(pathInfo.getPathList().get(k).pathMode) {
           case PathIterator.SEG_MOVETO:
             vertex(
-              vectorValues[0]+r*sin(frameCount/10), 
-              vectorValues[1]+r*sin(frameCount/10)
+              vectorValues[0]+rx, 
+              vectorValues[1]+random(-10, 10)
               );
             break;
           case PathIterator.SEG_LINETO:
             vertex(
-              vectorValues[0]+r*sin(frameCount/10), 
-              vectorValues[1]+r*sin(frameCount/10)
+              vectorValues[0]+rx, 
+              vectorValues[1]+random(-10, 10)
               );
             break;
           case PathIterator.SEG_QUADTO:
             quadraticVertex(
-              vectorValues[0]+r*sin(frameCount/10), 
-              vectorValues[1], 
+              vectorValues[0]+rx, 
+              vectorValues[1]+ry, 
               vectorValues[2], 
-              vectorValues[3]
+              vectorValues[3]+random(40)
               );
             break;
           case PathIterator.SEG_CUBICTO:
             bezierVertex(
-              vectorValues[0]+r*sin(frameCount/10), 
-              vectorValues[1], 
-              vectorValues[2], 
-              vectorValues[3], 
-              vectorValues[4], 
-              vectorValues[5]
+              vectorValues[0]+rx, 
+              vectorValues[1]+ry,
+              vectorValues[2]+rx, 
+              vectorValues[3]+random(-10, 10),
+              vectorValues[4]+random(-10, 10), 
+              vectorValues[5]+random(-10, 10)
               );
             break;
           }
