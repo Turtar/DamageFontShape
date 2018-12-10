@@ -13,12 +13,11 @@ void setup() {
   String fontName = "HiraginoSans-W6";
   int fontSize = 200;
   damageFontShape = new DamageFontShape(fontName, fontSize, "ふわふわ");
-  blendMode(ADD);
 }
 
 void draw() {
   
-  background(0);
+  background(255);
   fill(255, 0, 0);
   rx = 10 * cos(frameCount/40.0) * sin(frameCount/4);
   ry = 30 * sin(frameCount/100.0);
