@@ -13,11 +13,11 @@ public class DamageFontShape {
     FontRenderContext frc = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB)
       .createGraphics()
       .getFontRenderContext();
-  
+
     Shape stringShape = new Font(_fontName, Font.PLAIN, _fontSize)
       .createGlyphVector(frc, _drawString)
       .getOutline(textSumWidth, _fontSize);
-      
+
     int margin = 5;
     textSumWidth += stringShape.getBounds().width + margin;
     PathIterator iter = stringShape.getPathIterator(null);
@@ -66,32 +66,38 @@ public class DamageFontShape {
           switch(pathInfo.getPathList().get(k).pathMode) {
           case PathIterator.SEG_MOVETO:
             vertex(
-              vectorValues[0]+rx, 
-              vectorValues[1]+random(-10, 10)
+              vectorValues[0], 
+              vectorValues[1]+frameCount/4.0
               );
+
             break;
           case PathIterator.SEG_LINETO:
-            vertex(
-              vectorValues[0]+rx, 
-              vectorValues[1]+random(-10, 10)
+            bezierVertex(
+              vectorValues[0], 
+              vectorValues[1]+frameCount/4.0, 
+              vectorValues[0], 
+              vectorValues[1], 
+              vectorValues[0], 
+              vectorValues[1]
               );
+
             break;
-          case PathIterator.SEG_QUADTO:
-            quadraticVertex(
-              vectorValues[0]+rx, 
-              vectorValues[1]+ry, 
-              vectorValues[2], 
-              vectorValues[3]+random(40)
-              );
-            break;
+          //case PathIterator.SEG_QUADTO:
+          //  quadraticVertex(
+          //    vectorValues[0], 
+          //    vectorValues[1], 
+          //    vectorValues[2], 
+          //    vectorValues[3]
+          //    );
+          //  break;
           case PathIterator.SEG_CUBICTO:
             bezierVertex(
-              vectorValues[0]+rx, 
-              vectorValues[1]+ry,
-              vectorValues[2]+rx, 
-              vectorValues[3]+random(-10, 10),
-              vectorValues[4]+random(-10, 10), 
-              vectorValues[5]+random(-10, 10)
+              vectorValues[0], 
+              vectorValues[1]+frameCount/4.0, 
+              vectorValues[2], 
+              vectorValues[3], 
+              vectorValues[4], 
+              vectorValues[5]
               );
             break;
           }
