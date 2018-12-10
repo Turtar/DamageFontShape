@@ -12,7 +12,7 @@ void setup() {
 
   String fontName = "HiraginoSans-W6";
   int fontSize = 200;
-  damageFontShape = new DamageFontShape(fontName, fontSize, "ぎゃあーーー");
+  damageFontShape = new DamageFontShape(fontName, fontSize, "ふわふわ");
   blendMode(ADD);
 }
 
